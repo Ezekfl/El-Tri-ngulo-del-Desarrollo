@@ -24,6 +24,33 @@
     </div>
 
     <script>
+        document.getElementById('btnSaludar').addEventListener('click', function() {
+    const nombre = document.getElementById('nombreUsuario').value.trim();
+    const display = document.getElementById('mensaje');
+    
+    // 1. Regla de letras: Solo letras y espacios (mínimo 2, máximo 30)
+    const regexLetras = /^[a-zA-ZÁéíóúÁÉÍÓÚñÑ\s]{2,30}$/;
+    
+    // 2. Regla de coherencia: No más de 3 consonantes seguidas (evita asdfg...)
+    const regexCoherencia = /[^aeiouAEIOUÁÉÍÓÚñÑ\s]{4,}/;
+
+    if(nombre === "") {
+        display.innerText = "⚠️ Por favor, escribe algo.";
+        display.style.color = "red";
+    } 
+    else if (!regexLetras.test(nombre)) {
+        display.innerText = "❌ Usa solo letras (No eres el primogénito de Elon Musk).";
+        display.style.color = "orange";
+    }
+    else if (regexCoherencia.test(nombre)) {
+        display.innerText = "🤨 Eso no parece un nombre coherente.";
+        display.style.color = "purple";
+    }
+    else {
+        display.innerText = "¡Hola, " + nombre + "! Éxito en tu práctica de Git.";
+        display.style.color = "green";
+    }
+});
      </script>
 </body>
 </html>
